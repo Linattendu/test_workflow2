@@ -21,4 +21,5 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Lancer les tests
-        run: pytest home/projet_linux/test_agile/test_workflow.py
+        run: pytest home/projet_linux/test_agile/test_workflow.py 
+ 
