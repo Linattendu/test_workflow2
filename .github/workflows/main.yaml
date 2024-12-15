@@ -20,7 +20,7 @@ jobs:
       run : sudo apt-get install graphviz -y
 
     - name: Generate Documentation
-      run: doxygen
+      run: doxygen doxyfile.conf
 
     - name: Deploy Documentation
     
