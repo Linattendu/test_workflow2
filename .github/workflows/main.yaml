@@ -1,9 +1,9 @@
-name: Generate Doxygen Documentation
+name: Generate and Deploy Doxygen Documentation
 
 on:
   push:
     branches:
-      - main
+      - main  # Sur chaque push sur la branche main
 
 jobs:
   build:
@@ -19,17 +19,15 @@ jobs:
     - name: Install Graphviz
       run: sudo apt-get install graphviz -y
 
+    - name: Create Output Directory
+      run: mkdir -p documentation/v1.0/html  # Crée le chemin requis pour OUTPUT_DIRECTORY
+
     - name: Generate Documentation
       run: doxygen doxyfile.conf
-
-    - name: Debug Documentation Output
-      run: |
-        echo "Generated documentation files:"
-        ls -R documentation
 
     - name: Deploy Documentation
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: documentation/v1.0/html
-        destination_dir: v1.0  # Sous-dossier sur gh-pages
+        publish_dir: ./documentation/v1.0/html  # Pointage vers le répertoire de sortie
+        destination_dir: v1.0  # Déploiement dans un sous-dossier v1.0
