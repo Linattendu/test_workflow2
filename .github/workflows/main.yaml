@@ -16,14 +16,18 @@ jobs:
     - name: Install Doxygen
       run: sudo apt-get install doxygen -y
 
-    - name : Install Dot
-      run : sudo apt-get install graphviz -y
+    - name: Install Graphviz
+      run: sudo apt-get install graphviz -y
 
     - name: Generate Documentation
       run: doxygen doxyfile.conf
 
+    - name: Debug Documentation Output
+      run: |
+        echo "Generated documentation files:"
+        ls -R documentation
+
     - name: Deploy Documentation
-    
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
