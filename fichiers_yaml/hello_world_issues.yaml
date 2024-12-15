@@ -1,0 +1,24 @@
+name: Creer un commentaire dans une issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  commentaire-avec-action:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Ajouter un commentaire automatique
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Merci d'avoir créé cette issue ! 🎉 Nous allons examiner cela sous peu."
+            })
